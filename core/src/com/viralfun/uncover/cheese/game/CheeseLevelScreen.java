@@ -66,14 +66,26 @@ public class CheeseLevelScreen extends BaseScreen {
     }
 
     @Override
+    public boolean keyDown(int keycode) {
+        switch (keycode) {
+            case Input.Keys.M: {
+                game.setScreen( new CheeseMenuScreen(game) );
+                break;
+            }
+            case Input.Keys.P: {
+                togglePaused();
+                timerActor.setTicking(!isPaused());
+                break;
+            }
+            default: break;
+        }
+        return false;
+    }
+
+    @Override
     public void update(float deltaTime) {
         // check user input
         // check win condition: mouseActor must be overlapping cheese
-        if (Gdx.input.isKeyPressed(Input.Keys.M))
-            game.setScreen( new CheeseMenuScreen(game) );
-
-        mainStage.act(deltaTime);
-        uiStage.act(deltaTime);
 
         Rectangle cheeseRectangle = cheeseActor.getBoundingRectangle();
         Rectangle mouseActorRectangle = mouseActor.getBoundingRectangle();
@@ -82,10 +94,6 @@ public class CheeseLevelScreen extends BaseScreen {
             win = true;
             cheeseActor.onEat();
         }
-
-        // clear screen and draw graphics
-        Gdx.gl.glClearColor(0.8f, 0.8f, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Camera cam = mainStage.getCamera();
         // center camera on player
@@ -98,14 +106,10 @@ public class CheeseLevelScreen extends BaseScreen {
         cam.position.y = (float) MathUtils.clamp(cam.position.y, viewHeight /2, World.HEIGHT - viewHeight /2);
         cam.update();
 
-        mainStage.draw();
-
         if (win) {
             winActor.setVisible(true);
             timerActor.setTicking(false);
         }
-
-        uiStage.draw();
 
     }
 }
