@@ -8,10 +8,11 @@
 // it only in accordance with the terms of the license agreement
 // you entered into with Grindr LLC.
 //
-package com.viralfun.uncover;
+package com.viralfun.uncover.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -23,8 +24,10 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.viralfun.uncover.menu.CheeseMenuScreen;
+import com.viralfun.uncover.shared.World;
 
-public class CheeseLevel implements Screen {
+public class CheeseLevelScreen implements Screen {
     private SpriteBatch batch;
     private CheeseActor cheeseActor;
 
@@ -41,12 +44,12 @@ public class CheeseLevel implements Screen {
 
     public Game game;
 
-    public CheeseLevel(Game g)
+    public CheeseLevelScreen(Game g)
     {
         game = g;
         create();
     }
-    
+
     public void create() {
         batch = new SpriteBatch();
         mainStage = new Stage();
@@ -64,8 +67,7 @@ public class CheeseLevel implements Screen {
         mouseActor.initialize();
         mainStage.addActor(mouseActor);
 
-        winMessage = new Texture(
-                Gdx.files.internal("you-win.png"));
+        winMessage = new Texture(Gdx.files.internal("you-win.png"));
         win = false;
 
 
@@ -84,6 +86,10 @@ public class CheeseLevel implements Screen {
     public void render(float deltaTime) {
         // check user input
         // check win condition: mouseActor must be overlapping cheese
+
+        if (Gdx.input.isKeyPressed(Input.Keys.M))
+            game.setScreen( new CheeseMenuScreen(game) );
+
         mainStage.act(deltaTime);
         uiStage.act(deltaTime);
 

@@ -8,7 +8,9 @@
 // it only in accordance with the terms of the license agreement
 // you entered into with Grindr LLC.
 //
-package com.viralfun.uncover;
+package com.viralfun.uncover.shared;
 
-public class WinActor extends BaseActor {
+public class World {
+    public static float WIDTH = 800;
+    public static float HEIGHT = 800;
 }

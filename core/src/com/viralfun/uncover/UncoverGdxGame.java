@@ -1,10 +1,11 @@
 package com.viralfun.uncover;
 
 import com.badlogic.gdx.Game;
+import com.viralfun.uncover.menu.CheeseMenuScreen;
 
 public class UncoverGdxGame extends Game {
     public void create() {
-        CheeseLevel cl = new CheeseLevel(this);
+        CheeseMenuScreen cl = new CheeseMenuScreen(this);
         setScreen(cl);
     }
 }
