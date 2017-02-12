@@ -12,6 +12,8 @@ package com.viralfun.uncover;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 public class CheeseActor extends BaseActor {
     @Override
@@ -20,5 +22,16 @@ public class CheeseActor extends BaseActor {
         setTexture(new Texture(Gdx.files.internal("cheese.png")));
         setSize(60,60);
         setPosition(400, 300);
+        this.setOrigin(getWidth()/2, getHeight()/2);
+    }
+
+    public void onEat() {
+        Action spinShrinkFadeOut = Actions.parallel(
+                Actions.alpha(1), // set transparency value
+                Actions.rotateBy(360, 1), // rotation amount, duration
+                Actions.scaleTo(0, 0, 1), // x amount, y amount, duration
+                Actions.fadeOut(1) // duration of fade out
+        );
+        this.addAction( spinShrinkFadeOut );
     }
 }

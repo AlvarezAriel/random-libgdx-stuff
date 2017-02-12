@@ -49,7 +49,10 @@ public class UncoverGdxGame extends ApplicationAdapter {
         Rectangle cheeseRectangle = cheeseActor.getBoundingRectangle();
         Rectangle mouseyRectangle = mouseActor.getBoundingRectangle();
 
-        win = cheeseRectangle.overlaps(mouseyRectangle);
+        if (cheeseRectangle.overlaps(mouseyRectangle)) {
+            win = true;
+            cheeseActor.onEat();
+        }
 
         // clear screen and draw graphics
         Gdx.gl.glClearColor(0.8f, 0.8f, 1, 1);

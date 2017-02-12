@@ -13,15 +13,30 @@ package com.viralfun.uncover;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 
-public class MouseActor extends BaseActor {
+public class MouseActor extends AnimatedActor {
     @Override
     public void initialize() {
         super.initialize();
-        this.setTexture(new Texture(Gdx.files.internal("mouse.png")));
-        setWidth(40);
-        setHeight(40);
+        setWidth(60);
+        setHeight(80);
         setPosition(80, 80);
+        setOrigin(getWidth()/2, getHeight()/2);
+
+        TextureRegion[] frames = new TextureRegion[4];
+        for (int n = 0; n < 4; n++)
+        {
+            String fileName = "mouse" + n + ".png";
+            Texture tex = new Texture(Gdx.files.internal(fileName));
+            tex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            frames[n] = new TextureRegion( tex );
+        }
+        Array<TextureRegion> framesArray = new Array<TextureRegion>(frames);
+        Animation<TextureRegion> anim = new Animation<TextureRegion>(0.1f, framesArray, Animation.PlayMode.LOOP_PINGPONG);
+        this.setAnimation(anim);
     }
 
     @Override
