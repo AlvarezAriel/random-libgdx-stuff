@@ -3,6 +3,7 @@ package com.viralfun.uncover;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -64,15 +66,15 @@ public class UncoverGdxGame extends ApplicationAdapter {
 
     public void render() {
         // check user input
-        // check win condition: mousey must be overlapping cheese
+        // check win condition: mouseActor must be overlapping cheese
         float deltaTime = Gdx.graphics.getDeltaTime();
         mainStage.act(deltaTime);
         uiStage.act(deltaTime);
 
         Rectangle cheeseRectangle = cheeseActor.getBoundingRectangle();
-        Rectangle mouseyRectangle = mouseActor.getBoundingRectangle();
+        Rectangle mouseActorRectangle = mouseActor.getBoundingRectangle();
 
-        if (cheeseRectangle.overlaps(mouseyRectangle)) {
+        if (cheeseRectangle.overlaps(mouseActorRectangle)) {
             win = true;
             cheeseActor.onEat();
         }
@@ -80,6 +82,20 @@ public class UncoverGdxGame extends ApplicationAdapter {
         // clear screen and draw graphics
         Gdx.gl.glClearColor(0.8f, 0.8f, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+
+        Camera cam = mainStage.getCamera();
+        // center camera on player
+        cam.position.set( mouseActor.getX() + mouseActor.getOriginX(),
+                mouseActor.getY() + mouseActor.getOriginY(), 0 );
+        // bound camera to layout
+        double viewWidth = Gdx.graphics.getWidth();
+        cam.position.x = (float) MathUtils.clamp(cam.position.x, viewWidth /2, World.WIDTH - viewWidth /2);
+        double viewHeight = Gdx.graphics.getHeight();
+        cam.position.y = (float) MathUtils.clamp(cam.position.y, viewHeight /2, World.HEIGHT - viewHeight /2);
+        cam.update();
+
         mainStage.draw();
 
         batch.begin();
