@@ -5,7 +5,7 @@ import com.viralfun.uncover.cheese.menu.CheeseMenuScreen;
 
 public class UncoverGdxGame extends Game {
     public void create() {
-        CheeseMenuScreen cl = new CheeseMenuScreen(this);
+        MainMenuScreen cl = new MainMenuScreen(this);
         setScreen(cl);
     }
 }
