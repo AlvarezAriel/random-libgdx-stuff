@@ -20,27 +20,22 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.viralfun.uncover.cheese.menu.CheeseMenuScreen;
+import com.viralfun.uncover.shared.BaseScreen;
 import com.viralfun.uncover.shared.World;
 
-public class CheeseLevelScreen implements Screen {
+public class CheeseLevelScreen extends BaseScreen {
+
     private CheeseActor cheeseActor;
-
-    public Stage mainStage;
-    public Stage uiStage;
-
     private BackgroundTileActor backgroundTileActor;
     private MouseActor mouseActor;
-    private WinActor winActor;
-    private boolean win;
 
     private TimerActor timerActor;
+    private WinActor winActor;
 
-    public Game game;
+    private boolean win;
 
-    public CheeseLevelScreen(Game g)
-    {
-        game = g;
-        create();
+    public CheeseLevelScreen(Game g) {
+        super(g);
     }
 
     public void create() {
@@ -71,7 +66,7 @@ public class CheeseLevelScreen implements Screen {
     }
 
     @Override
-    public void render(float deltaTime) {
+    public void update(float deltaTime) {
         // check user input
         // check win condition: mouseActor must be overlapping cheese
         if (Gdx.input.isKeyPressed(Input.Keys.M))
@@ -111,36 +106,6 @@ public class CheeseLevelScreen implements Screen {
         }
 
         uiStage.draw();
-
-    }
-
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
 
     }
 }
