@@ -20,16 +20,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.viralfun.uncover.cheese.game.BackgroundTileActor;
+import com.viralfun.uncover.cheese.game.CheeseLevelScreen;
 import com.viralfun.uncover.cheese.menu.CheeseMenuScreen;
 import com.viralfun.uncover.shared.BaseActor;
+import com.viralfun.uncover.shared.BaseScreen;
 
-public class MainMenuScreen implements Screen {
-    private Stage uiStage;
-    private Game game;
+public class MainMenuScreen extends BaseScreen {
 
     public MainMenuScreen(Game g) {
-        game = g;
-        create();
+        super(g);
     }
 
     public void create() {
@@ -51,33 +50,19 @@ public class MainMenuScreen implements Screen {
         uiStage.addActor(instructions);
     }
 
-    public void render(float dt) {
-        // process input
-        if (Gdx.input.isKeyPressed(Input.Keys.NUM_1))
-            game.setScreen(new CheeseMenuScreen(game));
-        // update
-        uiStage.act(dt);
-        // draw graphics
-        Gdx.gl.glClearColor(0.8f, 0.8f, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        uiStage.draw();
+    public void update(float dt) {
+
     }
 
-    public void resize(int width, int height) {
-    }
-
-    public void pause() {
-    }
-
-    public void resume() {
-    }
-
-    public void dispose() {
-    }
-
-    public void show() {
-    }
-
-    public void hide() {
+    @Override
+    public boolean keyDown(int keycode) {
+        switch (keycode) {
+            case Input.Keys.NUM_1: {
+                game.setScreen(new CheeseMenuScreen(game));
+                break;
+            }
+            default: break;
+        }
+        return false;
     }
 }
