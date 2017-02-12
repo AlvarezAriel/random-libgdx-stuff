@@ -15,20 +15,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.viralfun.uncover.cheese.menu.CheeseMenuScreen;
-import com.viralfun.uncover.cheese.shared.World;
+import com.viralfun.uncover.shared.World;
 
 public class CheeseLevelScreen implements Screen {
-    private SpriteBatch batch;
     private CheeseActor cheeseActor;
 
     public Stage mainStage;
@@ -36,11 +30,10 @@ public class CheeseLevelScreen implements Screen {
 
     private BackgroundTileActor backgroundTileActor;
     private MouseActor mouseActor;
-    private Texture winMessage;
+    private WinActor winActor;
     private boolean win;
 
-    private float timeElapsed;
-    private Label timeLabel;
+    private TimerActor timerActor;
 
     public Game game;
 
@@ -51,7 +44,6 @@ public class CheeseLevelScreen implements Screen {
     }
 
     public void create() {
-        batch = new SpriteBatch();
         mainStage = new Stage();
         uiStage = new Stage();
 
@@ -67,26 +59,21 @@ public class CheeseLevelScreen implements Screen {
         mouseActor.initialize();
         mainStage.addActor(mouseActor);
 
-        winMessage = new Texture(Gdx.files.internal("you-win.png"));
+        winActor = new WinActor();
+        winActor.initialize();
+        uiStage.addActor(winActor);
+
+        timerActor = new TimerActor();
+        timerActor.initialize();
+        uiStage.addActor( timerActor );
+
         win = false;
-
-
-        timeElapsed = 0;
-        BitmapFont font = new BitmapFont();
-        String text = "Time: 0";
-        Label.LabelStyle style = new Label.LabelStyle( font, Color.NAVY );
-        timeLabel = new Label( text, style );
-        timeLabel.setFontScale(2);
-        timeLabel.setPosition(500, 440);
-
-        uiStage.addActor( timeLabel );
     }
 
     @Override
     public void render(float deltaTime) {
         // check user input
         // check win condition: mouseActor must be overlapping cheese
-
         if (Gdx.input.isKeyPressed(Input.Keys.M))
             game.setScreen( new CheeseMenuScreen(game) );
 
@@ -118,14 +105,10 @@ public class CheeseLevelScreen implements Screen {
 
         mainStage.draw();
 
-        batch.begin();
         if (win) {
-            batch.draw(winMessage, 170, 60);
-        } else {
-            timeElapsed += deltaTime;
-            timeLabel.setText( "Time: " + (int)timeElapsed );
+            winActor.setVisible(true);
+            timerActor.setTicking(false);
         }
-        batch.end();
 
         uiStage.draw();
 

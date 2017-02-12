@@ -14,7 +14,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.viralfun.uncover.cheese.shared.BaseActor;
+import com.viralfun.uncover.shared.BaseActor;
 
 public class CheeseActor extends BaseActor {
     @Override

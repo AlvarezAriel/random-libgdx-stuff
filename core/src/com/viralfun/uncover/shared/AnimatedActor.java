@@ -8,7 +8,7 @@
 // it only in accordance with the terms of the license agreement
 // you entered into with Grindr LLC.
 //
-package com.viralfun.uncover.cheese.shared;
+package com.viralfun.uncover.shared;
 
 
 import com.badlogic.gdx.graphics.Texture;

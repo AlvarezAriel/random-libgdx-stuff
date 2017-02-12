@@ -16,15 +16,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.viralfun.uncover.cheese.game.BackgroundTileActor;
-import com.viralfun.uncover.cheese.game.CheeseLevelScreen;
 import com.viralfun.uncover.cheese.menu.CheeseMenuScreen;
-import com.viralfun.uncover.cheese.shared.BaseActor;
+import com.viralfun.uncover.shared.BaseActor;
 
 public class MainMenuScreen implements Screen {
     private Stage uiStage;

@@ -17,8 +17,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-import com.viralfun.uncover.cheese.shared.AnimatedActor;
-import com.viralfun.uncover.cheese.shared.World;
+import com.viralfun.uncover.shared.AnimatedActor;
+import com.viralfun.uncover.shared.World;
 
 public class MouseActor extends AnimatedActor {
     @Override

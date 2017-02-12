@@ -14,7 +14,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.viralfun.uncover.cheese.shared.BaseActor;
+import com.viralfun.uncover.shared.BaseActor;
 
 public class BackgroundTileActor extends BaseActor {
     @Override

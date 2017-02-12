@@ -23,7 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.viralfun.uncover.cheese.game.BackgroundTileActor;
 import com.viralfun.uncover.cheese.game.CheeseLevelScreen;
-import com.viralfun.uncover.cheese.shared.BaseActor;
+import com.viralfun.uncover.shared.BaseActor;
 
 public class CheeseMenuScreen implements Screen {
     private Stage uiStage;
