@@ -3,26 +3,36 @@ package com.viralfun.uncover;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class UncoverGdxGame extends ApplicationAdapter {
     private SpriteBatch batch;
     private CheeseActor cheeseActor;
+
     public Stage mainStage;
+    public Stage uiStage;
+
     private BackgroundTileActor backgroundTileActor;
     private MouseActor mouseActor;
     private Texture winMessage;
     private boolean win;
 
+    private float timeElapsed;
+    private Label timeLabel;
+
     public void create() {
         batch = new SpriteBatch();
         mainStage = new Stage();
+        uiStage = new Stage();
 
         backgroundTileActor = new BackgroundTileActor();
         backgroundTileActor.initialize();
@@ -39,12 +49,25 @@ public class UncoverGdxGame extends ApplicationAdapter {
         winMessage = new Texture(
                 Gdx.files.internal("you-win.png"));
         win = false;
+
+
+        timeElapsed = 0;
+        BitmapFont font = new BitmapFont();
+        String text = "Time: 0";
+        Label.LabelStyle style = new Label.LabelStyle( font, Color.NAVY );
+        timeLabel = new Label( text, style );
+        timeLabel.setFontScale(2);
+        timeLabel.setPosition(500, 440);
+
+        uiStage.addActor( timeLabel );
     }
 
     public void render() {
         // check user input
         // check win condition: mousey must be overlapping cheese
-        mainStage.act(Gdx.graphics.getDeltaTime());
+        float deltaTime = Gdx.graphics.getDeltaTime();
+        mainStage.act(deltaTime);
+        uiStage.act(deltaTime);
 
         Rectangle cheeseRectangle = cheeseActor.getBoundingRectangle();
         Rectangle mouseyRectangle = mouseActor.getBoundingRectangle();
@@ -58,10 +81,17 @@ public class UncoverGdxGame extends ApplicationAdapter {
         Gdx.gl.glClearColor(0.8f, 0.8f, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         mainStage.draw();
+
         batch.begin();
-        if (win)
+        if (win) {
             batch.draw(winMessage, 170, 60);
+        } else {
+            timeElapsed += deltaTime;
+            timeLabel.setText( "Time: " + (int)timeElapsed );
+        }
         batch.end();
+
+        uiStage.draw();
 
     }
 
