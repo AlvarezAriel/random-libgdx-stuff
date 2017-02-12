@@ -8,9 +8,9 @@
 // it only in accordance with the terms of the license agreement
 // you entered into with Grindr LLC.
 //
-package com.viralfun.uncover.game;
+package com.viralfun.uncover.cheese.game;
 
-import com.viralfun.uncover.shared.BaseActor;
+import com.viralfun.uncover.cheese.shared.BaseActor;
 
 public class WinActor extends BaseActor {
 }

@@ -8,7 +8,7 @@
 // it only in accordance with the terms of the license agreement
 // you entered into with Grindr LLC.
 //
-package com.viralfun.uncover.game;
+package com.viralfun.uncover.cheese.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -17,8 +17,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-import com.viralfun.uncover.shared.AnimatedActor;
-import com.viralfun.uncover.shared.World;
+import com.viralfun.uncover.cheese.shared.AnimatedActor;
+import com.viralfun.uncover.cheese.shared.World;
 
 public class MouseActor extends AnimatedActor {
     @Override

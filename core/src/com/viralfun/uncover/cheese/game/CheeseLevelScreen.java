@@ -8,7 +8,7 @@
 // it only in accordance with the terms of the license agreement
 // you entered into with Grindr LLC.
 //
-package com.viralfun.uncover.game;
+package com.viralfun.uncover.cheese.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -24,8 +24,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.viralfun.uncover.menu.CheeseMenuScreen;
-import com.viralfun.uncover.shared.World;
+import com.viralfun.uncover.cheese.menu.CheeseMenuScreen;
+import com.viralfun.uncover.cheese.shared.World;
 
 public class CheeseLevelScreen implements Screen {
     private SpriteBatch batch;

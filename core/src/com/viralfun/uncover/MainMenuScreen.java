@@ -8,7 +8,7 @@
 // it only in accordance with the terms of the license agreement
 // you entered into with Grindr LLC.
 //
-package com.viralfun.uncover.menu;
+package com.viralfun.uncover;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -21,15 +21,16 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.viralfun.uncover.game.BackgroundTileActor;
-import com.viralfun.uncover.game.CheeseLevelScreen;
-import com.viralfun.uncover.shared.BaseActor;
+import com.viralfun.uncover.cheese.game.BackgroundTileActor;
+import com.viralfun.uncover.cheese.game.CheeseLevelScreen;
+import com.viralfun.uncover.cheese.menu.CheeseMenuScreen;
+import com.viralfun.uncover.cheese.shared.BaseActor;
 
-public class CheeseMenuScreen implements Screen {
+public class MainMenuScreen implements Screen {
     private Stage uiStage;
     private Game game;
 
-    public CheeseMenuScreen(Game g) {
+    public MainMenuScreen(Game g) {
         game = g;
         create();
     }
@@ -39,34 +40,24 @@ public class CheeseMenuScreen implements Screen {
         BackgroundTileActor backgroundTileActor = new BackgroundTileActor();
         backgroundTileActor.initialize();
         uiStage.addActor(backgroundTileActor);
-        BaseActor titleText = new BaseActor();
-        titleText.initialize();
-        titleText.setTexture(new Texture(Gdx.files.internal("cheese-please.png")));
-        titleText.setPosition(20, 100);
-        uiStage.addActor(titleText);
+
+        addOptionToMenu("cheese", 1, 50);
+    }
+
+    private void addOptionToMenu(String description, int number, float ypos) {
         BitmapFont font = new BitmapFont();
-        String text = " Press S to start, M for main menu ";
+        String text = number + " for " + description;
         Label.LabelStyle style = new Label.LabelStyle(font, Color.YELLOW);
         Label instructions = new Label(text, style);
         instructions.setFontScale(2);
-        instructions.setPosition(100, 50);
-// repeating color pulse effect
-        instructions.addAction(
-                Actions.forever(
-                        Actions.sequence(
-                                Actions.color(new Color(1, 1, 0, 1), 0.5f),
-                                Actions.delay(0.5f),
-                                Actions.color(new Color(0.5f, 0.5f, 0, 1), 0.5f)
-                        )
-                )
-        );
+        instructions.setPosition(100, ypos);
         uiStage.addActor(instructions);
     }
 
     public void render(float dt) {
         // process input
-        if (Gdx.input.isKeyPressed(Input.Keys.S))
-            game.setScreen(new CheeseLevelScreen(game));
+        if (Gdx.input.isKeyPressed(Input.Keys.NUM_1))
+            game.setScreen(new CheeseMenuScreen(game));
         // update
         uiStage.act(dt);
         // draw graphics
