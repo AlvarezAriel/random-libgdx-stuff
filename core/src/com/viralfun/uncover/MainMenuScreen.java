@@ -19,9 +19,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.viralfun.uncover.balloon.BalloonLevel;
 import com.viralfun.uncover.cheese.game.BackgroundTileActor;
 import com.viralfun.uncover.cheese.game.CheeseLevelScreen;
 import com.viralfun.uncover.cheese.menu.CheeseMenuScreen;
+import com.viralfun.uncover.plataformer.PlatformerScreen;
 import com.viralfun.uncover.shared.BaseActor;
 import com.viralfun.uncover.shared.BaseScreen;
 
@@ -37,7 +39,9 @@ public class MainMenuScreen extends BaseScreen {
         backgroundTileActor.initialize();
         uiStage.addActor(backgroundTileActor);
 
-        addOptionToMenu("cheese", 1, 50);
+        addOptionToMenu("balloon", 1, 150);
+        addOptionToMenu("cheese", 2, 100);
+        addOptionToMenu("square", 3, 50);
     }
 
     private void addOptionToMenu(String description, int number, float ypos) {
@@ -57,8 +61,15 @@ public class MainMenuScreen extends BaseScreen {
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode) {
-            case Input.Keys.NUM_1: {
+            case Input.Keys.NUM_3: {
+                game.setScreen(new PlatformerScreen(game));
+                break;
+            }            case Input.Keys.NUM_2: {
                 game.setScreen(new CheeseMenuScreen(game));
+                break;
+            }
+            case Input.Keys.NUM_1: {
+                game.setScreen(new BalloonLevel(game));
                 break;
             }
             default: break;
